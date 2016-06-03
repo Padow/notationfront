@@ -1,0 +1,27 @@
+<div ng-controller="Session">
+	<h1>Session</h1>
+	<div ng-if="sessionlist.$$state.value" ng-init="getSession(sessionlist.$$state.value)" ></div>
+	<div class="col-md-12" ng-if="sessiondata">
+		<table class="table table-striped">
+            <tr>
+                <th>Intitulé</th>
+                <th>Date</th>
+                <th>Détail</th>
+            </tr>
+            <tr ng-repeat="session in sessiondata">
+                <td>{{session.$$state.value.intitule}}</td>
+                <td>{{session.$$state.value.date}}</td>
+                <td><a href="./#/sessions/{{session.$$state.value.id}}" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a></td>                
+            </tr>
+        </table>
+	</div>
+
+	<div class="col-md-12" ng-if="session">
+		<div ng-if="session.$$state.value.enseignant" ng-init="getTeacher(session.$$state.value.enseignant)"></div>
+		<div ng-if="session.$$state.value.stagiaires" ng-init="getIntern(session.$$state.value.stagiaires)"></div>
+		<ul><h3>{{session.$$state.value.intitule}}</h3></ul>
+		<ul><strong>Date : </strong>{{session.$$state.value.date}}</ul>
+		<ul><strong>Enseignant : </strong><span ng-if="teacher">{{teacher.$$state.value.nom}} {{teacher.$$state.value.prenom}}</span></ul>
+		<ul><strong>Stagiaires</strong> <li class="marg" ng-if="interns" ng-repeat="intern in interns">{{intern.$$state.value.nom}} {{intern.$$state.value.prenom}}</li></ul>
+	</div>
+</div>

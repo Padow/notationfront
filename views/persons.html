@@ -1,0 +1,80 @@
+<div ng-controller="Person">
+    <h1>Person <button class="btn btn-default" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button></h1>
+
+    <div ng-if="personlist.$$state.value" ng-init="getPerson(personlist.$$state.value)" ></div>
+    <div class="col-md-12" ng-if="persondata">
+        <table class="table table-striped">
+            <tr>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Détail</th>
+                <th>Supprimer</th>
+            </tr>
+            <tr ng-repeat="person in persondata">
+                <td>{{person.$$state.value.nom}}</td>
+                <td>{{person.$$state.value.prenom}}</td>
+                <td><a href="./#/persons/{{person.$$state.value.id}}" class="btn btn-info btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a></td>
+                <td><button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete{{person.$$state.value.id}}"><span class="glyphicon glyphicon-trash"></span></button></td>
+                
+            </tr>
+        </table>
+        <div ng-repeat="person in persondata">
+            <div id="delete{{person.$$state.value.id}}" class="modal fade" tabindex="-1" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Supprimer</h4>
+                  </div>
+                  <div class="modal-body">
+                    <p>Nom : {{person.$$state.value.nom}}</p>
+                    <p>Prénom : {{person.$$state.value.prenom}}</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="deleteUser(person.$$state.value.id)" >Yes</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>    
+    </div>
+    <div id="add" class="modal fade" tabindex="-1" role="dialog">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Ajouter</h4>
+                  </div>
+                  <div class="modal-body">
+
+                    <form name="myForm"  ng-model="persontoadd">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="firstname">Nom</span>
+                            <input class="form-control" type="text" id="firstname" ng-model="persontoadd.nom" required>
+                        </div>
+                        &nbsp;
+                        <div class="input-group">
+                            <span class="input-group-addon" id="lastname">Prénom</span>
+                            <input class="form-control" type="text" id="lastname" ng-model="persontoadd.prenom" required>
+                        </div>
+                    </form>
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                    <button ng-if="!myForm.$valid" type="button" class="btn btn-primary" data-dismiss="modal" disabled >Yes</button>
+                    <button ng-if="myForm.$valid" type="button" class="btn btn-primary" data-dismiss="modal" ng-click="addperson(persontoadd)" >Yes</button>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+
+    <div class="col-md-12" ng-if="person">
+        <ul><strong>Nom : </strong>{{person.$$state.value.nom}}</ul>
+        <ul><strong>Prénom : </strong>{{person.$$state.value.prenom}}</ul>
+        <ul><strong>Session : </strong>
+            <li ng-repeat="session in person.$$state.value.sessions_menees">{{session}}</li>
+        </ul>
+    </div>
+</div>
