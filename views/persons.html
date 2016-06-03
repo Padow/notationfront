@@ -1,5 +1,6 @@
 <div ng-controller="Person">
-    <h1>Person <button class="btn btn-default" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button></h1>
+  <div ng-if="!information.message">
+    <h1>Person <button ng-if="persondata" class="btn btn-default" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button></h1>
 
     <div ng-if="personlist.$$state.value" ng-init="getPerson(personlist.$$state.value)" ></div>
     <div class="col-md-12" ng-if="persondata">
@@ -77,4 +78,8 @@
             <li ng-repeat="session in person.$$state.value.sessions_menees">{{session}}</li>
         </ul>
     </div>
+  </div>
+  <div ng-if="information.message">
+    <p>{{information.message}}</p>
+  </div>
 </div>

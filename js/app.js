@@ -23,7 +23,7 @@ var displayError = function (scope, errorResponse) {
     scope.information = {};
   }
   scope.information.showError = true;
-  scope.information.showWarning = false;
+  scope.information.showWarning = true;
   scope.information.showSuccess = false;
   scope.information.message = 'Erreur : [code ' + errorResponse.status + '] ' + errorResponse.data;
 };
@@ -98,12 +98,6 @@ app.factory('httpServices', ['$http',
   }
 ]);
 
-// add error message to scope if server send it
-function error($scope, socket){
-    socket.on('errorMessage', function(message){
-        $scope.errorMessage = message;
-    })
-}
 
 app.factory('apiUrl', function() {
   return {
@@ -113,10 +107,3 @@ app.factory('apiUrl', function() {
   };
 });
 
-app.filter('getid', function () {
-    function getid(string) {
-      var arr =  string.split("/");
-        return arr[arr.length-1];
-    }
-    return getid;
-});

@@ -18,12 +18,12 @@ app.controller("Session",function($scope, httpServices, apiUrl, $routeParams) {
     }
 
     $scope.getTeacher = function(uri){
-    	$scope.teacher = httpServices.asyncGet(uri, $scope);
+        $scope.teacher = httpServices.asyncGet(uri, $scope);
     }
 
     $scope.getIntern = function(uri){
-    	$scope.interns = [];
-    	for (var i = uri.length - 1; i >= 0; i--) {
+        $scope.interns = [];
+        for (var i = uri.length - 1; i >= 0; i--) {
             $scope.interns.push(httpServices.asyncGet(uri[i], $scope));
         };
     }
